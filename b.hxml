@@ -4,3 +4,4 @@
 -js b.js
 -dce full
 -cp ./externs
+-D js-es=6 

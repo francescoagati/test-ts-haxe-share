@@ -5,3 +5,4 @@
 -dce full
 -D analyzer-optimize
 -lib hxtsdgen
+-D js-es=6 
