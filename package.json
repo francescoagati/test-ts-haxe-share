@@ -1,0 +1,10 @@
+{
+  "name": "sss",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "francesco agati",
+  "license": "MIT",
+  "dependencies": {
+    "dts2hx": "^0.13.0"
+  }
+}
