@@ -1,8 +1,10 @@
+import tink.CoreApi.Promise;
 import tink.CoreApi.FutureTrigger;
 import tink.core.Signal;
 import Math.*;
 import haxe.io.Bytes;
 import js.html.MouseEvent;
+import tink.core.Future;
 
 @:keep
 @:expose
@@ -65,19 +67,44 @@ class Counter {
 @:keepInit
 class Counter2 {
 	var timer:haxe.Timer;
+
 	public var x = 0;
-  public var signal:Signal<Int>;
-  public var trigger:SignalTrigger<Int>;
+	public var signal:Signal<Int>;
+	public var trigger:SignalTrigger<Int>;
 
 	public function new() {
-
-    trigger = new SignalTrigger();
-    signal = trigger.asSignal();
+		trigger = new SignalTrigger();
+		signal = trigger.asSignal();
 
 		timer = new haxe.Timer(1000);
 		timer.run = () -> {
 			trigger.trigger(x++);
 		};
+	}
+}
+
+typedef Player = {
+	name:js.lib.Promise<String>,
+	surname:js.lib.Promise<String>
+}
+
+@:tink @:expose @:keep @:keepInit class Proxy {
+  public function new() {
+    
+  }
+	@:forward function player(player:Player) {
+		get:{
+		
+			new Promise((resolve, reject) -> {
+        var field = $name;
+        trace({field:field});
+				switch (field) {
+					case 'name': resolve('name');
+					case 'surname': resolve('surname');
+					case _: resolve("ciaone");
+				}
+			}).toJsPromise();
+		}, set:trace($name, param), call:trace('calling ' + $name + ' on ' + $id + ' with ' + $args)
 	}
 }
 

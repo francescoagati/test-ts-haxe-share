@@ -6,6 +6,7 @@ export class Summer {
 }
 
 export interface tink_core_LinkObject {
+	cancel(): void;
 }
 
 export interface tink_core_SignalObject<T> {
@@ -18,6 +19,12 @@ export interface tink_core_SignalObject<T> {
 
 export interface tink_core_FutureObject<T> {
 	map<R>(f: (arg0: T) => R): tink_core_FutureObject<R>;
+	/**
+	 *  Registers a callback to handle the future result.
+	 *  If the result is already available, the callback will be invoked immediately.
+	 *  @return A `CallbackLink` instance that can be used to cancel the callback, no effect if the callback is already invoked
+	 */
+	handle(callback: (arg0: T) => void): tink_core_LinkObject;
 	/**
 	 *  Caches the result to ensure the underlying tranform is performed once only.
 	 *  Useful for tranformed futures, such as product of `map` and `flatMap`
@@ -79,6 +86,14 @@ export class Counter2 {
 	x: number;
 	signal: tink_core_SignalObject<number>;
 	trigger: tink_core_SignalTrigger<number>;
+}
+
+export class Proxy {
+	constructor();
+	get_name(): Promise<string>;
+	set_name(param: Promise<string>): Promise<string>;
+	get_surname(): Promise<string>;
+	set_surname(param: Promise<string>): Promise<string>;
 }
 
 export type Class<Summer> = {
