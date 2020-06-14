@@ -66,19 +66,7 @@ export class Built {
 }
 
 export class Counter {
-	constructor(cb: (arg0: number) => void);
-}
-
-export class tink_core_SignalTrigger<T> implements tink_core_SignalObject<T> {
-	constructor();
-	listen(cb: (arg0: T) => void): tink_core_LinkObject;
-}
-
-export class Counter2 {
-	constructor();
-	x: number;
-	signal: tink_core_SignalObject<number>;
-	trigger: tink_core_SignalTrigger<number>;
+	constructor(cb: () => void);
 }
 
 export type Class<Summer> = {

@@ -101,32 +101,12 @@ $hx_exports["Built"] = Built;
 Built.__name__ = true;
 class Counter {
 	constructor(cb) {
-		this.x = 0;
 		this.timer = new haxe_Timer(1000);
-		var _gthis = this;
-		this.timer.run = function() {
-			cb(_gthis.x++);
-			return;
-		};
+		this.timer.run = cb;
 	}
 }
 $hx_exports["Counter"] = Counter;
 Counter.__name__ = true;
-class Counter2 {
-	constructor() {
-		this.x = 0;
-		this.trigger = new tink_core_SignalTrigger();
-		this.signal = this.trigger;
-		this.timer = new haxe_Timer(1000);
-		var _gthis = this;
-		this.timer.run = function() {
-			_gthis.trigger.handlers.invoke(_gthis.x++);
-			return;
-		};
-	}
-}
-$hx_exports["Counter2"] = Counter2;
-Counter2.__name__ = true;
 class Main {
 	static getSummer() {
 		return Summer;
@@ -135,7 +115,7 @@ class Main {
 		return { a : x + 1};
 	}
 	static main() {
-		console.log("src/Main.hx:93:","Hello, world!");
+		console.log("src/Main.hx:70:","Hello, world!");
 	}
 }
 $hx_exports["Main"] = Main;
